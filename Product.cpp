@@ -1,21 +1,26 @@
 #include "Product.hpp"
 
-int Product::get_netto() const
+int Product::getNetto() const
 {
     return netto;
 }
 
-int Product::get_VAT() const
+int Product::getVAT() const
 {
     return VAT;
 }
 
-std::string Product::get_name() const
+QString Product::getName() const
 {
     return name;
 }
 
-bool Product::operator == (const Product &new_object) const
+double Product::getPriceWithTax() const
 {
-    return name == new_object.get_name();
+    return netto * (1 + VAT / 100.0) / 100.0;
+}
+
+bool Product::operator == (const Product &newObject) const
+{
+    return name == newObject.getName();
 }

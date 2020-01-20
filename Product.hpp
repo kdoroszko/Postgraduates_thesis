@@ -1,21 +1,22 @@
 #pragma once
 
-#include <string>
+#include <QString>
 
 class Product
 {
 public:
 
-    Product(std::string new_name = "NULL", int new_price = 0, int new_tax = 0)
-        : name(new_name), netto(new_price), VAT(new_tax) {}
+    Product(QString newName = "NULL", int newPrice = 0, int newTax = 0)
+        : name(newName), netto(newPrice), VAT(newTax) {}
 
-    int get_netto() const;
-    int get_VAT() const;
-    std::string get_name() const;
-    bool operator == (const Product &new_object) const;
+    int getNetto() const;
+    int getVAT() const;
+    QString getName() const;
+    double getPriceWithTax() const;
+    bool operator == (const Product &newObject) const;
 
 private:
 
     const int netto, VAT; // CENA PODANA JEST W GROSZACH
-    const std::string name;
+    const QString name;
 };
