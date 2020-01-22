@@ -56,6 +56,22 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->labelProductPrice_12->setText(QString::number(productsInShop[12].getPriceWithTax(), 'f', 2) + " PLN");
     ui->labelProductPrice_13->setText(QString::number(productsInShop[13].getPriceWithTax(), 'f', 2) + " PLN");
     ui->labelProductPrice_14->setText(QString::number(productsInShop[14].getPriceWithTax(), 'f', 2) + " PLN");
+
+    ui->labelProductNamePrice_0->setText(productsInShop[0].getName() + '\n' + QString::number(productsInShop[0].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_1->setText(productsInShop[1].getName() + '\n' + QString::number(productsInShop[1].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_2->setText(productsInShop[2].getName() + '\n' + QString::number(productsInShop[2].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_3->setText(productsInShop[3].getName() + '\n' + QString::number(productsInShop[3].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_4->setText(productsInShop[4].getName() + '\n' + QString::number(productsInShop[4].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_5->setText(productsInShop[5].getName() + '\n' + QString::number(productsInShop[5].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_6->setText(productsInShop[6].getName() + '\n' + QString::number(productsInShop[6].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_7->setText(productsInShop[7].getName() + '\n' + QString::number(productsInShop[7].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_8->setText(productsInShop[8].getName() + '\n' + QString::number(productsInShop[8].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_9->setText(productsInShop[9].getName() + '\n' + QString::number(productsInShop[9].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_10->setText(productsInShop[10].getName() + '\n' + QString::number(productsInShop[10].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_11->setText(productsInShop[11].getName() + '\n' + QString::number(productsInShop[11].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_12->setText(productsInShop[12].getName() + '\n' + QString::number(productsInShop[12].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_13->setText(productsInShop[13].getName() + '\n' + QString::number(productsInShop[13].getPriceWithTax(), 'f', 2) + " PLN");
+    ui->labelProductNamePrice_14->setText(productsInShop[14].getName() + '\n' + QString::number(productsInShop[14].getPriceWithTax(), 'f', 2) + " PLN");
 }
 
 MainWindow::~MainWindow()
