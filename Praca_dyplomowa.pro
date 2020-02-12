@@ -14,12 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Product.cpp
+    Product.cpp \
+    addproductdialog.cpp \
+    Cart.cpp
 
 HEADERS  += mainwindow.hpp \
-    Product.hpp
+    Product.hpp \
+    addproductdialog.hpp \
+    Cart.hpp
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    addproductdialog.ui
 
 RESOURCES += \
     images.qrc

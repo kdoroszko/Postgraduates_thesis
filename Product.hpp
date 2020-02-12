@@ -13,10 +13,16 @@ public:
     int getVAT() const;
     QString getName() const;
     double getPriceWithTax() const;
+
     bool operator == (const Product &newObject) const;
 
 private:
 
-    const int netto, VAT; // CENA PODANA JEST W GROSZACH
+    const int netto, VAT; // PRICE IN PLN SUBUNIT - GROSZ
     const QString name;
 };
+
+inline uint qHash(const Product &key, uint seed)
+{
+    return qHash(key.getName(), seed) ^ key.getNetto();
+}

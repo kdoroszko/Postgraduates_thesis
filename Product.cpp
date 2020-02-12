@@ -22,5 +22,5 @@ double Product::getPriceWithTax() const
 
 bool Product::operator == (const Product &newObject) const
 {
-    return name == newObject.getName();
+    return name == newObject.name;
 }
