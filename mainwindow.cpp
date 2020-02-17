@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     productsInShop({Product("Agrest", 1000, 23), Product("Banan", 2000, 23), Product("Borówka", 3000, 23),
-                   Product("Gruszka", 600, 23), Product("Jabłko", 500, 23), Product("Pożeczka", 450, 23),
+                   Product("Gruszka", 600, 23), Product("Jabłko", 500, 23), Product("Porzeczka", 450, 23),
                    Product("Truskawka", 1500, 23), Product("Cebula", 50, 8), Product("Marchewka", 150, 8),
                    Product("Ogórek", 500, 8), Product("Papryka", 900, 8), Product("Pieczarka", 350, 8),
                    Product("Pomidor", 95, 8), Product("Rzodkiewka", 200, 8), Product("Reklamówka", 20, 90)})
@@ -14,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->stackedWidget->setCurrentIndex(0);
+
+    ui->subLabel->setText("<p align = \"center\"><br>Uwaga! W koszyku nie może być więcej niż " + QString::number(shopCart.getCartCapacity()) + " różnych produktów."
+                          + "<br>Te, które znajdują się już w koszyku, nie mogą być w większej ilości niż " + QString::number(shopCart.getMaxQtyOfOneProductInCart()) + ".");
 
     ui->labelProductName_0->setText((productsInShop.at(0)).getName());
     ui->labelProductName_1->setText((productsInShop.at(1)).getName());
@@ -62,6 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->labelProductNamePrice_12->setText((productsInShop.at(12)).getName() + '\n' + QString::number((productsInShop.at(12)).getPriceWithTax(), 'f', 2) + " PLN");
     ui->labelProductNamePrice_13->setText((productsInShop.at(13)).getName() + '\n' + QString::number((productsInShop.at(13)).getPriceWithTax(), 'f', 2) + " PLN");
     ui->labelProductNamePrice_14->setText((productsInShop.at(14)).getName() + '\n' + QString::number((productsInShop.at(14)).getPriceWithTax(), 'f', 2) + " PLN");
+
+    connect(&shopCart, SIGNAL(sendMessage(int,Product,int)), this, SLOT(createMessageForUser(int,Product,int)));
 }
 
 MainWindow::~MainWindow()
@@ -327,4 +332,25 @@ void MainWindow::on_pushButtonBag_clicked()
 
     addDialog.setModal(true);
     addDialog.exec();
+}
+
+void MainWindow::createMessageForUser(int typeOfMessage, Product productToSend, int qtyOfProduct)
+{
+    switch(typeOfMessage)
+    {
+    case 0:
+        QMessageBox::information(this, "Dodałeś produkt", "<p align = \"center\">Dodałeś do koszyka - " + productToSend.getName() + ", w ilości: " + QString::number(qtyOfProduct));
+        break;
+
+    case 1:
+        QMessageBox::information(this, "Brak miejsca w koszyku", "<p align = \"center\">Nie możesz dodać do koszyka - " + productToSend.getName() + ", w ilości: " + QString::number(qtyOfProduct)
+                                 + "<br>Maksymalna ilość danego przedmiotu w koszyku to: " + QString::number(shopCart.getMaxQtyOfOneProductInCart()) + ","
+                                 + "<br>a aktualna liczba w koszyku to: " + QString::number(((shopCart.getCartQHashContainer()).find(productToSend)).value()));
+        break;
+
+    case 2:
+        QMessageBox::information(this, "Brak miejsca w koszyku", "<p align = \"center\">Nie możesz dodać do koszyka - " + productToSend.getName() + ", w ilości: " + QString::number(qtyOfProduct)
+                                 + "<br>W koszyku może znajdować się maksymalnie " + QString::number(shopCart.getCartCapacity()) + " różnych produktów");
+        break;
+    }
 }

@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QString>
 #include <array>
+#include <QMessageBox>
 #include "Product.hpp"
 #include "Cart.hpp"
 
@@ -60,6 +61,8 @@ private slots:
     void on_pushButtonTomato_clicked();
     void on_pushButtonRadish_clicked();
     void on_pushButtonBag_clicked();
+
+    void createMessageForUser(int typeOfMessage, Product productToSend, int qtyOfProduct);
 
 private:
     Ui::MainWindow *ui;

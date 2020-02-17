@@ -1,9 +1,16 @@
 #include "Cart.hpp"
-#include <QDebug>
+
+Cart::Cart(QObject *parent) :
+    QObject(parent) {}
 
 QHash<Product, int> &Cart::getCartQHashContainer()
 {
     return cartQHashContainer;
+}
+
+int Cart::getCartCapacity() const
+{
+    return cartCapacity;
 }
 
 int Cart::getMaxQtyOfOneProductInCart() const
@@ -18,11 +25,11 @@ void Cart::addProduct(const Product newProduct, const int newQty)
     if (it != cartQHashContainer.end())
     {
         if (it.value() + newQty > maxQtyOfOneProductInCart)
-            qDebug() << "Nie zmiesci sie tyle w koszyku.\n"; // emit signal, create new dialog
+            emit sendMessage(noMoreSpaceForThisProduct, it.key(), newQty);
         else
         {
             it.value() += newQty;
-            qDebug() << "Dodales do koszyka " << newProduct.getName() << ", w ilosci: " << newQty << '\n'; // emit signal, create new dialog
+            emit sendMessage(productIsAdded, newProduct, newQty);
         }
 
         return;
@@ -30,10 +37,10 @@ void Cart::addProduct(const Product newProduct, const int newQty)
 
     if (cartQHashContainer.size() >= cartCapacity)
     {
-        qDebug() << "W koszyku jest juz 10 roznych produktow. Aby dodac kolejny usun przynajmniej jeden produkt z koszyka.\n"; // emit signal, create new dialog
+        emit sendMessage(noMoreSpaceInCart, newProduct, newQty);
         return;
     }
 
     cartQHashContainer.insert(newProduct, newQty);
-    qDebug() << "Dodales do koszyka " << newProduct.getName() << ", w ilosci: " << newQty << '\n'; // emit signal, create new dialog
+    emit sendMessage(productIsAdded, newProduct, newQty);
 }
